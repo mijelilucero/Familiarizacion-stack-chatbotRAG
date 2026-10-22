@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# IntelliJ
+.idea/
+*.iml
+
+# Compilados y dependencias
+target/
+node_modules/
+.next/
+
+# Variables de entorno
+.env
+.env.local
+
+# Volcado de la base de datos de la fase 1 (contiene datos; se genera localmente)
+practica-chatbot/replica/01-*.sql
