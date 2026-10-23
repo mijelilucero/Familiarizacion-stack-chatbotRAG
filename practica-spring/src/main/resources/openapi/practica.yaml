@@ -1,0 +1,46 @@
+openapi: 3.0.3                       # 1. Versión del estándar
+info:                                # 2. Datos de tu API
+  title: practica-spring
+  version: 1.0.0
+servers:                             # 3. Dónde corre
+  - url: http://localhost:8082
+
+paths:                               # 4. Las rutas
+  /api/v2/saludo:                    #    una ruta...
+    post:                            #    ...con su método HTTP
+      tags: [Saludo]                 #    grupo al que pertenece
+      operationId: crearSaludo       #    nombre de la operación (será el método Java)
+      summary: Crea un saludo personalizado
+      requestBody:                   #    qué recibe en el cuerpo
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SaludoRequest'
+      responses:                     #    qué responde, según el código HTTP
+        '200':
+          description: Saludo creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SaludoRespuesta'
+        '400':
+          description: Nombre vacío o demasiado largo
+
+components:                          # 5. Las piezas reutilizables
+  schemas:                           #    los modelos de datos (objetos JSON)
+    SaludoRequest:
+      type: object
+      required: [nombre]
+      properties:
+        nombre:
+          type: string
+          minLength: 1
+          maxLength: 50
+    SaludoRespuesta:
+      type: object
+      properties:
+        mensaje:
+          type: string
+        hora:
+          type: string
